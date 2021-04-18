@@ -31,7 +31,7 @@ class UserController extends Controller
             'email' => 'required',
             'gender' => 'required',
             'dob' => 'required|date',
-            'password' => 'nullable',
+            'password' => 'required',
             'status_id' => 'required'
         ] );
     }
