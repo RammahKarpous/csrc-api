@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,15 +20,16 @@ class User extends Authenticatable
     protected $fillable = [
         // 'family_group_id',
         'member_type_id',
+        'slug',
         // 'event_id',
         'name',
         'email',
-        // 'gender',
-        // 'dob',
+        'gender',
+        'dob',
         'password',
         // 'lane',
         // 'result',
-        // 'status_id',
+        'status_id',
     ];
 
     /**
@@ -48,4 +50,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $dates = ['dob'];
+
+    public function setDateAttribute($date)
+    {
+        $this->attributes['dob'] = Carbon::parse($date);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
