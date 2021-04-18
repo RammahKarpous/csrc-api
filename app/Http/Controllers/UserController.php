@@ -32,7 +32,7 @@ class UserController extends Controller
             'gender' => 'required',
             'dob' => 'required|date',
             'password' => 'required',
-            'status_id' => 'required'
+            'status' => 'required'
         ] );
     }
 }

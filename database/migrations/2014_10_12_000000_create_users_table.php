@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('event_id')->nullable();
             $table->string('gender');
             $table->timestamp('dob');
-            $table->foreignId('status_id');
+            $table->string('status');
             $table->string('slug');
             $table->string('name');
             $table->string('email');

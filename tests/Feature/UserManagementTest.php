@@ -32,7 +32,7 @@ class UserManagementTest extends TestCase
             'gender' => 'Male',
             'dob' => '09/28/1998',
             'password' => 'robert',
-            'status_id' => 3
+            'status' => 'active'
         ] );
 
         $response->assertStatus(201);
@@ -50,12 +50,12 @@ class UserManagementTest extends TestCase
 
         $response = $this->post('/api/parents/store', [
             'member_type' => 'child',
-            'name' => 'Rammah Karpous',
-            'email' => 'rammahkarpous@outlook.com',
-            'gender' => 'Male',
-            'dob' => '09/28/1998',
-            'password' => 'robert',
-            'status_id' => 3
+            'name' => 'Syndy Carlson',
+            'email' => 'S23424C@crsc.com',
+            'gender' => 'Female',
+            'dob' => '09/28/2006',
+            'password' => 'syndy',
+            'status' => 'active'
         ] );
 
         $response->assertStatus(201);

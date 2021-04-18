@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password',
         // 'lane',
         // 'result',
-        'status_id',
+        'status',
     ];
 
     /**
