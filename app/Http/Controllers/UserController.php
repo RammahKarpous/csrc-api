@@ -8,11 +8,18 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function index()
+    {
+        return User::all();
+    }
+
     public function store()
     {
-        // $this->validated();
-        // dd(request()->all());
-        User::create(array_merge($this->validated(), ['slug' => Str::slug(request('name'))]));
+        $this->validated();
+        $user = User::create(array_merge($this->validated(), ['slug' => Str::slug(request('name'))]));
+
+        return $user;
     }
 
     public function validated()

@@ -35,7 +35,7 @@ class UserManagementTest extends TestCase
             'status_id' => 3
         ] );
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
         $this->assertCount(1, User::all());
     }
 }
