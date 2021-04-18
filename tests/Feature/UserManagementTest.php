@@ -27,7 +27,6 @@ class UserManagementTest extends TestCase
 
         $response = $this->post('/api/parents/store', [
             'member_type_id' => 2,
-            // 'group_id' => null,
             'name' => 'Rammah Karpous',
             'email' => 'rammahkarpous@outlook.com',
             'gender' => 'Male',
