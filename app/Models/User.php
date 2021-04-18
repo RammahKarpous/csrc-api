@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         // 'family_group_id',
-        'member_type_id',
+        'member_type',
         'slug',
         // 'event_id',
         'name',

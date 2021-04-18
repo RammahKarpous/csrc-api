@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         return request()->validate( [
             // 'family_group_id' => 'nullable',
-            'member_type_id' => 'required',
+            'member_type' => 'required',
             'name' => 'required',
             'email' => 'required',
             'gender' => 'required',
