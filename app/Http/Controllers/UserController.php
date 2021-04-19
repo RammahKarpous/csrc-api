@@ -16,9 +16,13 @@ class UserController extends Controller
 
     public function store()
     {
-        $this->validated();
         $user = User::create(array_merge($this->validated(), ['slug' => Str::slug(request('name'))]));
+        return $user;
+    }
 
+    public function update(User $user)
+    {
+        $user->update(array_merge($this->validated(), ['slug' => Str::slug(request('name'))]));
         return $user;
     }
 

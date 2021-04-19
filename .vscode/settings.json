@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "CRSC-API",
+            "database": "${workspaceFolder:csrc-api}/database/database.sqlite"
+        }
+    ]
+}

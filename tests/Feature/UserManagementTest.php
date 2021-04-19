@@ -61,4 +61,26 @@ class UserManagementTest extends TestCase
         $response->assertStatus(201);
         $this->assertCount(1, User::all());
     }
+
+    public function test_club_owner_can_edit_a_member_name()
+    {
+        // $this->withoutExceptionHandling();
+
+        User::factory()->create();
+
+        $user = User::first();
+
+        $response = $this->patch('/api/user/' . $user->slug , [
+            'member_type' => 'child',
+            'name' => 'Carla Carlson',
+            'email' => 'S23424C@crsc.com',
+            'gender' => 'Female',
+            'dob' => '09/28/2006',
+            'password' => 'syndy',
+            'status' => 'active'
+        ] );
+
+        $response->assertStatus(200);
+        $this->assertCount(1, User::all());
+    }
 }
