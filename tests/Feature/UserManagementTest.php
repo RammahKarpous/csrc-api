@@ -18,8 +18,6 @@ class UserManagementTest extends TestCase
 
     public function test_club_owner_can_create_a_parent()
     {
-        $this->withoutExceptionHandling();
-
         MemberType::factory()->count(2)->create();
         Status::factory()->count(3)->create();
 
@@ -41,8 +39,6 @@ class UserManagementTest extends TestCase
 
     public function test_club_owner_can_create_a_swimmer()
     {
-        $this->withoutExceptionHandling();
-
         MemberType::factory()->count(2)->create();
         Status::factory()->count(3)->create();
 
@@ -64,8 +60,6 @@ class UserManagementTest extends TestCase
 
     public function test_club_owner_can_edit_a_member_name()
     {
-        // $this->withoutExceptionHandling();
-
         User::factory()->create();
 
         $user = User::first();
