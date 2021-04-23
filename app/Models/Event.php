@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Meet extends Model
+class Event extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function events()
+    public function meet()
     {
-        return $this->hasMany(Event::class);
+        return $this->belongsTo(Meet::class);
     }
 }

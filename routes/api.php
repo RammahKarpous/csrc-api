@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MeetController;
 use App\Http\Controllers\UserController;
@@ -33,3 +34,6 @@ Route::post('/groups/store', [GroupController::class, 'store']);
 
 // Meets
 Route::post('/meets/store', [MeetController::class, 'store']);
+
+// Events
+Route::post('/events/store', [EventController::class, 'store']);
