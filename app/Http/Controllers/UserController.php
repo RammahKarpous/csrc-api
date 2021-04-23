@@ -26,6 +26,12 @@ class UserController extends Controller
         return $user;
     }
 
+    public function archive(User $user)
+    {
+        $user->update(array_merge($this->validated(), ['slug' => Str::slug(request('name'))]));
+        return $user;
+    }
+
     public function validated()
     {
         return request()->validate( [

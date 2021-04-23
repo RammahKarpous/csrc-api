@@ -64,7 +64,7 @@ class UserManagementTest extends TestCase
 
         $user = User::first();
 
-        $response = $this->patch('/api/user/' . $user->slug , [
+        $response = $this->patch('/api/user/' . $user->slug . '/update' , [
             'member_type' => 'child',
             'name' => 'Carla Carlson',
             'email' => 'S23424C@crsc.com',
@@ -72,6 +72,26 @@ class UserManagementTest extends TestCase
             'dob' => '09/28/2006',
             'password' => 'syndy',
             'status' => 'active'
+        ] );
+
+        $response->assertStatus(200);
+        $this->assertCount(1, User::all());
+    }
+
+    public function test_club_owner_can_archive_a_member()
+    {
+        User::factory()->create();
+
+        $user = User::first();
+
+        $response = $this->patch('/api/user/' . $user->slug . '/archive' , [
+            'member_type' => 'child',
+            'name' => 'Carla Carlson',
+            'email' => 'S23424C@crsc.com',
+            'gender' => 'Female',
+            'dob' => '09/28/2006',
+            'password' => 'syndy',
+            'status' => 'archived'
         ] );
 
         $response->assertStatus(200);
