@@ -22,7 +22,10 @@ class MeetFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->word,
+            'venue' => $this->faker->word,
+            'date' => $this->faker->date,
+            'pool_length' => $this->faker->randomDigit
         ];
     }
 }
