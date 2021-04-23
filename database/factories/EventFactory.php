@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Controllers\EventController;
 use App\Models\Event;
 use App\Models\Meet;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,6 +29,7 @@ class EventFactory extends Factory
 
         return [
             'meet_id' => $meet->id,
+            'slug' => 'event-23453',
             'age_range' => 'Juniors (under 16)',
             'start_time' => '13:00:00',
             'end_time' => '14:00:00',
