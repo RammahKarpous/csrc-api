@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\MeetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +30,6 @@ Route::post('/swimmers/store', [UserController::class, 'store']);
 
 // Groups
 Route::post('/groups/store', [GroupController::class, 'store']);
+
+// Meets
+Route::post('/meets/store', [MeetController::class, 'store']);
