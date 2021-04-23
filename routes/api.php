@@ -40,3 +40,4 @@ Route::post('/meets/store', [MeetController::class, 'store']);
 
 // Events
 Route::post('/events/store', [EventController::class, 'store']);
+Route::patch('/events/{event:slug}/addTimes', [EventController::class, 'addTimes']);

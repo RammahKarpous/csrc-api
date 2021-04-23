@@ -20,21 +20,37 @@ class EventManagementTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
+        $response = $this->post('/api/events/store', $this->data());
+
+        $response->assertStatus(201);
+        $this->assertCount(1, Event::all());
+    }
+
+    public function test_add_times_to_event()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->post('/api/events/store', array_merge($this->data(), [
+            'start_time' => '13:00:00',
+            'end_time' => '14:00:00',
+        ]));
+
+        $response->assertStatus(201);
+        $this->assertCount(1, Event::all());
+    }
+
+    public function data()
+    {
         Meet::factory()->create();
         $meet = Meet::first();
 
-        $response = $this->post('/api/events/store', [
+        return [
             'meet_id' => $meet->id,
             'age_range' => 'Juniors (under 16)',
-            'start_time' => '13:00:00',
-            'end_time' => '14:00:00',
             'gender' => 'female',
             'distance' => $this->faker->randomDigit,
             'stroke' => 'Backstroke',
             'round' => $this->faker->randomDigit
-        ]);
-
-        $response->assertStatus(201);
-        $this->assertCount(1, Event::all());
+        ];
     }
 }
