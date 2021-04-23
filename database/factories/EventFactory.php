@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Http\Controllers\EventController;
 use App\Models\Event;
 use App\Models\Meet;
 use Illuminate\Database\Eloquent\Factories\Factory;
