@@ -32,11 +32,18 @@ class UserController extends Controller
         return $user;
     }
 
+    public function addToEvent(User $user)
+    {
+        $user->update(array_merge($this->validated(), ['slug' => Str::slug(request('name'))]));
+        return $user;
+    }
+
     public function validated()
     {
         return request()->validate( [
             // 'family_group_id' => 'nullable',
             'member_type' => 'required',
+            'event_id' => 'nullable',
             'name' => 'required',
             'email' => 'required',
             'gender' => 'required',

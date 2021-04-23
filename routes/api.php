@@ -24,8 +24,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Users
 Route::get('/users', [UserController::class, 'index']);
+
 Route::patch('/user/{user:slug}/update', [UserController::class, 'update']);
 Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);
+Route::patch('/user/{user:slug}/addToEvent', [UserController::class, 'addToEvent']);
+
 Route::post('/parents/store', [UserController::class, 'store']);
 Route::post('/swimmers/store', [UserController::class, 'store']);
 

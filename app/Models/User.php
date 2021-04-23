@@ -21,7 +21,7 @@ class User extends Authenticatable
         // 'family_group_id',
         'member_type',
         'slug',
-        // 'event_id',
+        'event_id',
         'name',
         'email',
         'gender',

@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Event;
+use App\Models\Meet;
 use App\Models\MemberType;
 use App\Models\Status;
 use App\Models\User;
@@ -16,7 +18,7 @@ class UserManagementTest extends TestCase
     use RefreshDatabase;
     use WithoutMiddleware;
 
-    public function test_club_owner_can_create_a_parent()
+    public function test_club_official_can_create_a_parent()
     {
         MemberType::factory()->count(2)->create();
         Status::factory()->count(3)->create();
@@ -37,7 +39,7 @@ class UserManagementTest extends TestCase
         $this->assertCount(1, User::all());
     }
 
-    public function test_club_owner_can_create_a_swimmer()
+    public function test_club_official_can_create_a_swimmer()
     {
         MemberType::factory()->count(2)->create();
         Status::factory()->count(3)->create();
@@ -58,7 +60,7 @@ class UserManagementTest extends TestCase
         $this->assertCount(1, User::all());
     }
 
-    public function test_club_owner_can_edit_a_member_name()
+    public function test_club_official_can_edit_a_member_name()
     {
         User::factory()->create();
 
@@ -78,7 +80,7 @@ class UserManagementTest extends TestCase
         $this->assertCount(1, User::all());
     }
 
-    public function test_club_owner_can_archive_a_member()
+    public function test_club_official_can_archive_a_member()
     {
         User::factory()->create();
 
@@ -86,6 +88,32 @@ class UserManagementTest extends TestCase
 
         $response = $this->patch('/api/user/' . $user->slug . '/archive' , [
             'member_type' => 'child',
+            'name' => 'Carla Carlson',
+            'email' => 'S23424C@crsc.com',
+            'gender' => 'Female',
+            'dob' => '09/28/2006',
+            'password' => 'syndy',
+            'status' => 'archived'
+        ] );
+
+        $response->assertStatus(200);
+        $this->assertCount(1, User::all());
+    }
+
+    public function test_club_official_can_add_swimmer_to_event()
+    {
+
+        $this->withoutExceptionHandling();
+
+        Event::factory()->create();
+        $event = Event::first();
+
+        User::factory()->create();
+        $user = User::first();
+
+        $response = $this->patch('/api/user/' . $user->slug . '/addToEvent' , [
+            'member_type' => 'child',
+            'event_id' => $event->id,
             'name' => 'Carla Carlson',
             'email' => 'S23424C@crsc.com',
             'gender' => 'Female',
