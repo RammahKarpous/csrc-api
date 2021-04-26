@@ -8,6 +8,12 @@ use Illuminate\Support\Str;
 
 class GroupController extends Controller
 {
+
+    public function index()
+    {
+        return Group::all();
+    }
+
     public function store()
     {
         $group = Group::create( [

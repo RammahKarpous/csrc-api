@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class MeetController extends Controller
 {
+
+    public function index()
+    {
+        return Meet::all();
+    }
+
     public function store()
     {
         $meet = Meet::create([
