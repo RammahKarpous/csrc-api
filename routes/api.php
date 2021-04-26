@@ -24,6 +24,7 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 // Users
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/login', [UserController::class, 'login']);
 
 Route::patch('/user/{user:slug}/update', [UserController::class, 'update']);
 Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);

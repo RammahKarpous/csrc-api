@@ -20,6 +20,16 @@ class UserController extends Controller
         return $user;
     }
 
+    public function login()
+    {
+
+        $credentials = request()->only(['email', 'password']);
+
+        $token = auth()->attempt($credentials);
+
+        return $token;
+    }
+
     public function update(User $user)
     {
         $user->update(array_merge($this->validated(), ['slug' => Str::slug(request('name'))]));
