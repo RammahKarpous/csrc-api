@@ -24,7 +24,7 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 // Users
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/login', [UserController::class, 'login']);
+Route::post('/users/login', [UserController::class, 'login']);
 
 Route::patch('/user/{user:slug}/update', [UserController::class, 'update']);
 Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);
@@ -34,9 +34,11 @@ Route::post('/parents/store', [UserController::class, 'store']);
 Route::post('/swimmers/store', [UserController::class, 'store']);
 
 // Groups
+Route::get('/groups', [GroupController::class, 'index']);
 Route::post('/groups/store', [GroupController::class, 'store']);
 
 // Meets
+Route::get('/meets', [MeetController::class, 'index']);
 Route::post('/meets/store', [MeetController::class, 'store']);
 
 // Events
