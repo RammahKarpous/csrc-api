@@ -69,8 +69,8 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['dob'] = Carbon::parse($date);
     }
 
-    public function status()
+    public function group()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Group::class);
     }
 }
