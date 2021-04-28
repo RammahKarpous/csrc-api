@@ -22,7 +22,12 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'family_name' => $this->faker->lastName,
+            'address_line' => $this->faker->address,
+            'place' => $this->faker->city,
+            'postcode' => $this->faker->postcode,
+            'contact_number' => $this->faker->phoneNumber,
+            'email' => $this->faker->safeEmail
         ];
     }
 }

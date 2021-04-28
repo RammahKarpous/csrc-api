@@ -14,18 +14,19 @@ class GroupManagementTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
+    use WithFaker;
 
     public function test_club_official_can_create_a_family_group()
     {
         $this->withExceptionHandling();
 
         $response = $this->post('/api/groups/store', [
-            'family_name' => 'Karpous',
-            'address_line' => '47 Fernley Road',
-            'place' => 'Birmingham',
-            'postcode' => 'B11 3NS',
-            'contact_number' => '07123456789',
-            'email' => 'karpous@crsc.com'
+            'family_name' => $this->faker->lastName,
+            'address_line' => $this->faker->address,
+            'place' => $this->faker->city,
+            'postcode' => $this->faker->postcode,
+            'contact_number' => $this->faker->phoneNumber,
+            'email' => $this->faker->safeEmail
         ]);
 
         $response->assertStatus(201);
