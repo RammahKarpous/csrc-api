@@ -31,6 +31,7 @@ Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);
 Route::patch('/user/{user:slug}/addToEvent', [UserController::class, 'addToEvent']);
 
 Route::post('/parents/store', [UserController::class, 'store']);
+Route::get('/parent/{user:slug}/view-profile', [UserController::class, 'viewProfile']);
 Route::post('/swimmers/store', [UserController::class, 'store']);
 
 // Groups

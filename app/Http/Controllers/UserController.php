@@ -22,12 +22,17 @@ class UserController extends Controller
 
     public function login()
     {
-
         $credentials = request()->only(['email', 'password']);
 
         $token = auth()->attempt($credentials);
 
         return $token;
+    }
+
+    public function viewProfile(User $user)
+    {
+        $user = User::first();
+        return $user->group;
     }
 
     public function update(User $user)
