@@ -51,7 +51,7 @@ class UserController extends Controller
     public function validated()
     {
         return request()->validate( [
-            'family_group_id' => 'nullable',
+            'group_id' => 'nullable',
             'member_type' => 'required',
             'event_id' => 'nullable',
             'name' => 'required',
