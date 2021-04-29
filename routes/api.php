@@ -22,26 +22,31 @@ Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Users
+// Public routes
 Route::get('/users', [UserController::class, 'index']);
-Route::post('/users/login', [UserController::class, 'login']);
-
-Route::patch('/user/{user:slug}/update', [UserController::class, 'update']);
-Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);
-Route::patch('/user/{user:slug}/addToEvent', [UserController::class, 'addToEvent']);
-
-Route::post('/parents/store', [UserController::class, 'store']);
 Route::get('/parent/{user:slug}/view-profile', [UserController::class, 'viewProfile']);
-Route::post('/swimmers/store', [UserController::class, 'store']);
-
-// Groups
 Route::get('/groups', [GroupController::class, 'index']);
-Route::post('/groups/store', [GroupController::class, 'store']);
-
-// Meets
 Route::get('/meets', [MeetController::class, 'index']);
-Route::post('/meets/store', [MeetController::class, 'store']);
 
-// Events
-Route::post('/events/store', [EventController::class, 'store']);
-Route::patch('/events/{event:slug}/addTimes', [EventController::class, 'addTimes']);
+// Protected routes (need authentication)
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Users
+    Route::post('/users/login', [UserController::class, 'login']);
+    
+    Route::patch('/user/{user:slug}/update', [UserController::class, 'update']);
+    Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);
+    Route::patch('/user/{user:slug}/addToEvent', [UserController::class, 'addToEvent']);
+    
+    Route::post('/parents/store', [UserController::class, 'store']);
+    Route::post('/swimmers/store', [UserController::class, 'store']);
+    
+    // Groups
+    Route::post('/groups/store', [GroupController::class, 'store']);
+    
+    // Meets
+    Route::post('/meets/store', [MeetController::class, 'store']);
+    
+    // Events
+    Route::post('/events/store', [EventController::class, 'store']);
+    Route::patch('/events/{event:slug}/addTimes', [EventController::class, 'addTimes']);
+});
