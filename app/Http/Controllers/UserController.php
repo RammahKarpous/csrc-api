@@ -5,6 +5,8 @@ use Illuminate\Support\Str;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,17 +18,53 @@ class UserController extends Controller
 
     public function store()
     {
-        $user = User::create(array_merge($this->validated(), ['slug' => Str::slug(request('name'))]));
-        return $user;
+        $user = User::create(array_merge($this->validated(), [
+            'slug' => Str::slug(request('name')),
+            'password' => Hash::make(request('password'))
+        ]));
+
+        $token = $user->createToken('gg-token')->plainTextToken;
+        
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return response($response, 201);
     }
 
     public function login()
     {
-        $credentials = request()->only(['email', 'password']);
+        $val = request()->validate( [
+            'email' => 'required', 
+            'password' => 'required'
+        ] );
 
-        $token = auth()->attempt($credentials);
+        $user = User::where( 'email', $val[ 'email' ] );
 
-        return $token;
+        if ( !$user || !Hash::check( $val[ 'password' ], $user->password ) ) {
+            return response( [
+                'message' => 'You are unauthorised'
+            ], 401 );
+        }
+
+        $token = $user->createToken( 'gg-token' )->plainTextToken;
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return response($response, 201);
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => 'logged out'
+        ];
     }
 
     public function viewProfile(User $user)

@@ -23,9 +23,13 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 });
 
 // Public routes
+Route::get('/groups', [GroupController::class, 'index']);
+
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/parent/{user:slug}/view-profile', [UserController::class, 'viewProfile']);
-Route::get('/groups', [GroupController::class, 'index']);
+Route::post('/parents/store', [UserController::class, 'store']);
+Route::post('/users/login', [UserController::class, 'login']);
+
 Route::get('/meets', [MeetController::class, 'index']);
 
 // Protected routes (need authentication)
@@ -36,8 +40,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::patch('/user/{user:slug}/update', [UserController::class, 'update']);
     Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);
     Route::patch('/user/{user:slug}/addToEvent', [UserController::class, 'addToEvent']);
+
+    Route::post('/users/logout', [UserController::class, 'logout']);
     
-    Route::post('/parents/store', [UserController::class, 'store']);
+    
     Route::post('/swimmers/store', [UserController::class, 'store']);
     
     // Groups
