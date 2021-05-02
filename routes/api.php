@@ -33,9 +33,7 @@ Route::get('/meets', [MeetController::class, 'index']);
 
 // Protected routes (need authentication)
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    // Users
-    Route::post('/users/login', [UserController::class, 'login']);
-    
+    // Users    
     Route::patch('/user/{user:slug}/update', [UserController::class, 'update']);
     Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);
     Route::patch('/user/{user:slug}/addToEvent', [UserController::class, 'addToEvent']);

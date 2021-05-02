@@ -36,11 +36,11 @@ class UserController extends Controller
     public function login()
     {
         $val = request()->validate( [
-            'email' => 'required', 
-            'password' => 'required'
+            'email' => 'required|string|email', 
+            'password' => 'required|string'
         ] );
 
-        $user = User::where( 'email', $val[ 'email' ] );
+        $user = User::where( 'email', $val[ 'email' ] )->first();
 
         if ( !$user || !Hash::check( $val[ 'password' ], $user->password ) ) {
             return response( [
@@ -51,7 +51,7 @@ class UserController extends Controller
         $token = $user->createToken( 'gg-token' )->plainTextToken;
 
         $response = [
-            'user' => $user,
+            'user' => [$user, $user->group()],
             'token' => $token
         ];
 
@@ -70,7 +70,7 @@ class UserController extends Controller
     public function viewProfile(User $user)
     {
         $user = User::first();
-        return $user->group;
+        return $user;
     }
 
     public function update(User $user)
