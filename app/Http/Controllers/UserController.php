@@ -51,7 +51,7 @@ class UserController extends Controller
         $token = $user->createToken( 'gg-token' )->plainTextToken;
 
         $response = [
-            'user' => [$user, $user->group()],
+            'user' => $user,
             'token' => $token
         ];
 
