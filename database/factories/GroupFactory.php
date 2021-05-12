@@ -24,6 +24,7 @@ class GroupFactory extends Factory
         return [
             'family_name' => $this->faker->lastName,
             'address_line' => $this->faker->address,
+            'slug' => $this->faker->lastName,
             'place' => $this->faker->city,
             'postcode' => $this->faker->postcode,
             'contact_number' => $this->faker->phoneNumber,
