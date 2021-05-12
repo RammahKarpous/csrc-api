@@ -16,16 +16,23 @@ class GroupController extends Controller
 
     public function store()
     {
-        $group = Group::create( [
-            'family_name' => request('family_name'),
-            'slug' => request(Str::slug('family_name')),
-            'address_line' => request('address_line'),
-            'place' => request('place'),
-            'postcode' => request('postcode'),
-            'email' => request('email'),
-            'contact_number' => request('contact_number')
-        ] );
-
+        $group = Group::create( array_merge($this->data(), 
+            [ 'slug' => request(Str::slug( 'slug' ) ) ] 
+        ));
+    
         return $group;
+    }
+
+    public function data()
+    {
+        return request()->validate( [
+            'family_name' => 'required|string',
+            'slug' => 'required|string',
+            'address_line' => 'required|string',
+            'place' => 'required|string',
+            'postcode' => 'required|string',
+            'email' => 'required|string|email',
+            'contact_number' => 'required|string'
+        ] );
     }
 }
