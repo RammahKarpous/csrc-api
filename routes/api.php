@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/parent/{user:slug}/view-profile', [UserController::class, 'viewProfile']);
     
     Route::post('/swimmers/store', [UserController::class, 'store']);
+    Route::get('/swimmers/{user:slug}/races', [UserController::class, 'races']);
     
     // Groups
     Route::post('/groups/store', [GroupController::class, 'store']);

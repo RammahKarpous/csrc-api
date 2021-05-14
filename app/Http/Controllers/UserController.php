@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Group;
 use Illuminate\Support\Str;
 
@@ -33,6 +34,13 @@ class UserController extends Controller
         ];
 
         return response($response, 201);
+    }
+
+    public function races(User $user)
+    {
+        $user = User::first();
+        $event = Event::where('id', '=', $user->id)->get();
+        return [ $user, $event ];
     }
 
     public function login()
