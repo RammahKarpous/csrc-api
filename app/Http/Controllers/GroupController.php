@@ -23,6 +23,12 @@ class GroupController extends Controller
         return $group;
     }
 
+    public function editPhoneNumber(Group $group)
+    {
+        $group->update(array_merge($this->data(), ['contact_number' => request('contact_number')]));
+        return $group;
+    }
+
     public function data()
     {
         return request()->validate( [

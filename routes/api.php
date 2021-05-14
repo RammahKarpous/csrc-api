@@ -28,6 +28,7 @@ Route::get('/groups', [GroupController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/parents/store', [UserController::class, 'store']);
 Route::post('/users/login', [UserController::class, 'login']);
+Route::post('/admin/login', [UserController::class, 'login']);
 
 Route::get('/meets', [MeetController::class, 'index']);
 
@@ -38,13 +39,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::patch('/user/{user:slug}/archive', [UserController::class, 'archive']);
     Route::patch('/user/{user:slug}/addToEvent', [UserController::class, 'addToEvent']);
 
-    Route::post('/users/logout', [UserController::class, 'logout']);
     Route::get('/parent/{user:slug}/view-profile', [UserController::class, 'viewProfile']);
     
     Route::post('/swimmers/store', [UserController::class, 'store']);
     
     // Groups
     Route::post('/groups/store', [GroupController::class, 'store']);
+    Route::put('/groups/{group:slug}/edit-phone-number', [GroupController::class, 'editPhoneNumber']);
     
     // Meets
     Route::post('/meets/store', [MeetController::class, 'store']);

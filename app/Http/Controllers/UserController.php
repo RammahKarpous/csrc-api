@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Group;
 use Illuminate\Support\Str;
 
 use App\Models\User;
@@ -58,19 +60,11 @@ class UserController extends Controller
         return response($response, 201);
     }
 
-    public function logout()
-    {
-        auth()->user()->tokens()->delete();
-
-        return [
-            'message' => 'logged out'
-        ];
-    }
-
     public function viewProfile(User $user)
     {
         $user = User::first();
-        return $user;
+        $group = Group::find($user->id);
+        return [ $user, $group ];
     }
 
     public function update(User $user)
