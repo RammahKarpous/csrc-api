@@ -27,7 +27,7 @@ class UserManagementTest extends TestCase
 
         $response = $this->post('/api/parents/store', array_merge($this->data(), [
             'member_type' => 'parent',
-            'name' => 'Rammah Karpous',
+            'name' => 'Rammah',
             'email' => 'rammahkarpous@outlook.com',
             'gender' => 'Male',
             'dob' => '09/28/1998',
@@ -37,6 +37,22 @@ class UserManagementTest extends TestCase
 
         $response->assertStatus(201);
         $this->assertCount(1, User::all());
+    }
+
+    public function test_name_is_required()
+    {
+
+        $response = $this->post('/api/parents/store', array_merge($this->data(), [
+            'member_type' => 'parent',
+            'name' => '',
+            'email' => 'rammahkarpous@outlook.com',
+            'gender' => 'Male',
+            'dob' => '09/28/1998',
+            'password' => 'robert',
+            'status' => 'active'
+        ]) );
+
+        $response->assertSessionHasErrors('name');
     }
 
     public function test_club_official_can_create_a_swimmer()
